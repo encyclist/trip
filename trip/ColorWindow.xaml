@@ -1,0 +1,45 @@
+﻿<Window x:Class="trip.ColorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ColorWindow" Height="240" Width="260" ShowInTaskbar="False" AllowsTransparency="True" WindowStyle="None" Background="#FFE4C4">
+    <Grid Name="color_grid">
+        <Label Height="10" VerticalAlignment="Top" MouseMove="Grid_MouseMove" ToolTip="按住我可以拖动窗口" Margin="0,-1,0,0"/>
+        
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FF69B4" ToolTip="热情的粉红" Margin="10,9,220,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#9370DB" ToolTip="适中的紫色" Margin="45,9,185,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#6A5ACD" ToolTip="板岩暗蓝灰色" Margin="80,9,150,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#4169E1" ToolTip="皇军蓝" Margin="115,9,115,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#1E90FF" ToolTip="道奇蓝" Margin="150,9,80,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#333333" ToolTip="奢华的感觉" Margin="185,9,45,201"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#40E0D0" ToolTip="绿宝石" Margin="220,9,10,201"/>
+
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#00FA9A" ToolTip="适中的碧绿色" Margin="10,44,220,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#3CB371" ToolTip="春天的绿色" Margin="45,44,185,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#32CD32" ToolTip="酸橙绿" Margin="80,44,150,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#7FFF00" ToolTip="查特酒绿" Margin="115,44,115,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#ADFF2F" ToolTip="绿黄色" Margin="150,44,80,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FFD700" ToolTip="金" Margin="185,44,45,166"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#808000" ToolTip="橄榄" Margin="220,44,10,166"/>
+
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FFA500" ToolTip="橙色" Margin="10,79,220,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#D2691E" ToolTip="巧克力" Margin="45,79,185,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FF4500" ToolTip="橙红色" Margin="80,79,150,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FF6347" ToolTip="番茄" Margin="115,79,115,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FF0000" ToolTip="纯红" Margin="150,79,80,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#FFFFFF" ToolTip="纯白" Margin="185,79,45,131"/>
+        <Label Height="30" Width="30" MouseLeftButtonUp="Label_MouseLeftButtonUp" Background="#01ffffff" ToolTip="透明" Margin="220,79,10,131"/>
+
+        <Label Height="30" Width="95" Content="自定义颜色:" Margin="10,118,155,92"/>
+        <Label Height="30" Width="18" Content="A" Margin="10,153,232,57"/>
+        <TextBox Text="255" ToolTip="1~255" MaxLength="3" Name="tb_a" HorizontalAlignment="Left" Height="23" Margin="28,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
+        <Label Height="30" Width="18" Content="R" Margin="68,153,174,57"/>
+        <TextBox ToolTip="0~255" MaxLength="3" Name="tb_r" HorizontalAlignment="Left" Height="23" Margin="86,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
+        <Label Height="30" Width="18" Content="G" Margin="127,153,115,57"/>
+        <TextBox ToolTip="0~255" MaxLength="3" Name="tb_g" HorizontalAlignment="Left" Height="23" Margin="145,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
+        <Label Height="30" Width="18" Content="B" Margin="185,153,57,57"/>
+        <TextBox ToolTip="0~255" MaxLength="3" Name="tb_b" HorizontalAlignment="Left" Height="23" Margin="203,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
+        <Button Width="100" Height="30" Content="使用自定义颜色" Margin="150,200,10,10" Click="Button_Click"/>
+        <Button Name="GetColor" Margin="70,200,0,0" Width="70" Height="30" Content="点击取色" VerticalAlignment="Top" HorizontalAlignment="Left" Click="GetColor_Click" />
+        <Button Content="取消" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="50" Height="30" Click="Button_Click_1"/>
+    </Grid>
+</Window>
