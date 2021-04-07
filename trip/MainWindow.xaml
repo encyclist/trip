@@ -5,9 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trip"
-        mc:Ignorable="d"
-        Title="有事" Height="350" Width="525" MinHeight="50" MinWidth="50"
-        SizeToContent="WidthAndHeight" Visibility="Visible" ShowInTaskbar="False" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}">
+        mc:Ignorable="d" Height="350" Width="525" MinHeight="50" MinWidth="50"
+        SizeToContent="WidthAndHeight" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ShowInTaskbar="False" Title="便签">
     <Grid Name="b_grid" Background="#00000000">
         <Label Margin="0,10,0,0" Width="10" HorizontalAlignment="Left" MouseUp="Labe2_MouseUp" ToolTip="点击更换文字颜色" Background="#00DDDDDD" BorderBrush="#00707070"/>
         <Label Height="10" VerticalAlignment="Top" MouseMove="Grid_MouseMove" ToolTip="按住我可以拖动窗口"/>
