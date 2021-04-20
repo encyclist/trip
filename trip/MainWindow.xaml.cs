@@ -146,6 +146,7 @@ namespace trip
 
             b_grid.Background = new SolidColorBrush(color);
             texxt.Foreground = brush2;
+            texxt.CaretBrush = brush2;
             m_streamWriter2.Close();
             panl.Left = leftinfo;
             panl.Top = topinfo;
@@ -274,7 +275,9 @@ namespace trip
         // 更换文字颜色返回事件
         private void FrmChild_TextColorChangeBetweenForm(object sender, ColorChangeEventArgs e)
         {
-            texxt.Foreground = new SolidColorBrush(e.Color);
+            SolidColorBrush brush = new SolidColorBrush(e.Color);
+            texxt.Foreground = brush;
+            texxt.CaretBrush = brush;
             Writeinfo();
         }
 
