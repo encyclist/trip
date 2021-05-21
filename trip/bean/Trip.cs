@@ -27,7 +27,7 @@ namespace trip.bean
         public string Content { get; private set; }
 
         // 配置文件路径
-        public string CongigFilePath { get; private set; }
+        public string ConfigFilePath { get; private set; }
         // 内容文件路径
         public string ContentFilePath { get; private set; }
         // 历史记录文件路径
@@ -58,11 +58,11 @@ namespace trip.bean
         {
             string appPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-            CongigFilePath = appPath + @"\congig-" + CreateTime + ".ini";
+            ConfigFilePath = appPath + @"\congig.ini";
             ContentFilePath = appPath + @"\content-" + CreateTime + ".txt"; ;
             HistoryFilePath = appPath + @"\history-" + CreateTime + ".txt"; ;
 
-            IniFile = new IniFile(CongigFilePath);
+            IniFile = new IniFile(ConfigFilePath);
             ReadConfig();
             ReadContent();
         }

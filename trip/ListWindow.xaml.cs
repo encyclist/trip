@@ -62,6 +62,35 @@ namespace trip
             }
         }
 
+        private void MenuItem_Click_Hide(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = mainWindows[listView.SelectedIndex];
+            mainWindow.Close();
+            mainWindows.Remove(mainWindow);
+        }
+
+        private void MenuItem_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            Trip item = (Trip)listView.SelectedItem;
+            MainWindow mainWindow = null;
+
+            listView.Items.Remove(item);
+            foreach (MainWindow mainWindow1 in mainWindows) 
+            {
+                if (mainWindow1.IsSame(item))
+                {
+                    mainWindow = mainWindow1;
+                    break;
+                }
+            }
+            mainWindows.Remove(mainWindow);
+            mainWindow.Close();
+
+            File.Delete(item.ContentFilePath);
+            File.Delete(item.HistoryFilePath);
+            item.IniFile.ClearSection(item.CreateTime);
+        }
+
         // 列表页面关闭时关闭所有窗口
         private void OnClosedWindow(object sender, EventArgs e)
         {
@@ -76,7 +105,17 @@ namespace trip
             Trip trip = new Trip();
             MainWindow mainWindow = new MainWindow(trip);
             mainWindows.Add(mainWindow);
+            listView.Items.Add(trip);
             mainWindow.Show();
+        }
+
+        private void OnClickHideAll(object sender, RoutedEventArgs e)
+        {
+            foreach (MainWindow mainWindow in mainWindows)
+            {
+                mainWindow.Close();
+            }
+            mainWindows.Clear();
         }
 
         private void OnActivited(object sender, EventArgs e)

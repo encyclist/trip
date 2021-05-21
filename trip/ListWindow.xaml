@@ -33,13 +33,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Click="OnClickAdd" Width="50" Margin="10,0,0,0" HorizontalAlignment="Left" Content="添加"/>
-        <Button Grid.Row="0" Grid.Column="1" Click="OnClickAdd" Width="70" Margin="10,0,0,0" HorizontalAlignment="Left" Content="全部显示" Visibility="Hidden"/>
+        <Button Grid.Row="0" Grid.Column="1" Click="OnClickHideAll" Width="70" Margin="10,0,0,0" HorizontalAlignment="Left" Content="全部隐藏"/>
         <ListView Grid.Row="1" Grid.ColumnSpan="2" x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="显示" Click="MenuItem_Click_Show"/>
-                    <MenuItem Header="隐藏" Click="MenuItem_Click_Show"/>
-                    <MenuItem Header="删除" Click="MenuItem_Click_Show"/>
+                    <MenuItem Header="隐藏" Click="MenuItem_Click_Hide"/>
+                    <MenuItem Header="删除" Click="MenuItem_Click_Delete"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemTemplate>
