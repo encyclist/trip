@@ -22,7 +22,6 @@ namespace trip
 
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-
             string appPath = Directory.GetCurrentDirectory();
             FileInfo[] files = new DirectoryInfo(appPath).GetFiles();
             foreach (FileInfo file in files)
@@ -35,6 +34,7 @@ namespace trip
                     MainWindow mainWindow = new MainWindow(trip);
                     mainWindows.Add(mainWindow);
                     listView.Items.Add(trip);
+                    mainWindow.Show();
                 }
             }
         }
@@ -77,6 +77,14 @@ namespace trip
             MainWindow mainWindow = new MainWindow(trip);
             mainWindows.Add(mainWindow);
             mainWindow.Show();
+        }
+
+        private void OnActivited(object sender, EventArgs e)
+        {
+            foreach (Trip trip in listView.Items)
+            {
+                trip.ReLoad();
+            }
         }
     }
 }

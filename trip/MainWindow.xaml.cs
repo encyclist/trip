@@ -99,13 +99,13 @@ namespace trip
         //写配置信息
         void Writeinfo()
         {
-            trip.IniFile.IniWriteValue(trip.createTime, "Left", "" + panl.Left);
-            trip.IniFile.IniWriteValue(trip.createTime, "Top", "" + panl.Top);
-            trip.IniFile.IniWriteValue(trip.createTime, "Width", "" + panl.Width);
-            trip.IniFile.IniWriteValue(trip.createTime, "Height", "" + panl.Height);
-            trip.IniFile.IniWriteValue(trip.createTime, "Topmost", "" + this.Topmost);
-            trip.IniFile.IniWriteValue(trip.createTime, "TBackgroundColorop", ((Brush)b_grid.Background).ToString());
-            trip.IniFile.IniWriteValue(trip.createTime, "ForegroundColor", ((Brush)texxt.Foreground).ToString());
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Left", "" + panl.Left);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Top", "" + panl.Top);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Width", "" + panl.Width);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Height", "" + panl.Height);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Topmost", "" + this.Topmost);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "TBackgroundColorop", ((Brush)b_grid.Background).ToString());
+            trip.IniFile.IniWriteValue(trip.CreateTime, "ForegroundColor", ((Brush)texxt.Foreground).ToString());
         }
 
         // 固定顶层/取消固定

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using ToolsCommon;
 
 namespace trip.bean
 {
-    public class Trip
+    public class Trip: INotifyPropertyChanged
     {
         // 背景颜色
         public string BackgroundColor { get; private set; }
@@ -18,9 +19,9 @@ namespace trip.bean
         // 是否置顶
         public bool Topmost { get; private set; }
         // 宽
-        public double Width { get; private set; }
+        private double Width;
         // 高
-        public double Height { get; private set; }
+        private double Height;
 
         // 文字内容
         public string Content { get; private set; }
@@ -36,18 +37,20 @@ namespace trip.bean
         public IniFile IniFile { get; private set; }
 
         // 创建时间
-        public string createTime { get; private set; }
+        public string CreateTime { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Trip()
         {
             TimeSpan ts = DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1);
-            createTime = ((long)ts.TotalMilliseconds).ToString();
+            CreateTime = ((long)ts.TotalMilliseconds).ToString();
 
             Init();
         }
         public Trip(string time)
         {
-            createTime = time;
+            CreateTime = time;
             Init();
         }
 
@@ -55,43 +58,50 @@ namespace trip.bean
         {
             string appPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-            CongigFilePath = appPath + @"\congig-" + createTime + ".ini";
-            ContentFilePath = appPath + @"\content-" + createTime + ".txt"; ;
-            HistoryFilePath = appPath + @"\history-" + createTime + ".txt"; ;
+            CongigFilePath = appPath + @"\congig-" + CreateTime + ".ini";
+            ContentFilePath = appPath + @"\content-" + CreateTime + ".txt"; ;
+            HistoryFilePath = appPath + @"\history-" + CreateTime + ".txt"; ;
 
             IniFile = new IniFile(CongigFilePath);
             ReadConfig();
             ReadContent();
         }
 
+        public void ReLoad()
+        {
+            ReadConfig();
+            ReadContent();
+            OnPropertyChanged(new PropertyChangedEventArgs(""));
+        }
+
         // 读取配置文件
         private void ReadConfig() 
         {
-            string leftinfos = IniFile.IniReadValue(createTime, "Left");
+            string leftinfos = IniFile.IniReadValue(CreateTime, "Left");
             if (leftinfos == null || leftinfos.Length < 1) leftinfos = "100";
             Left = Double.Parse(leftinfos);
 
-            string topinfos = IniFile.IniReadValue(createTime, "Top");
+            string topinfos = IniFile.IniReadValue(CreateTime, "Top");
             if (topinfos == null || topinfos.Length < 1) topinfos = "100";
             Top = Double.Parse(topinfos);
 
-            string widthinfos = IniFile.IniReadValue(createTime, "Width");
+            string widthinfos = IniFile.IniReadValue(CreateTime, "Width");
             if (widthinfos == null || widthinfos.Length < 1) widthinfos = "300";
             Width = Double.Parse(widthinfos);
 
-            string heightinfos = IniFile.IniReadValue(createTime, "Height");
+            string heightinfos = IniFile.IniReadValue(CreateTime, "Height");
             if (heightinfos == null || heightinfos.Length < 1) heightinfos = "300";
             Width = Double.Parse(heightinfos);
 
-            string cinfo = IniFile.IniReadValue(createTime, "TBackgroundColorop");
+            string cinfo = IniFile.IniReadValue(CreateTime, "TBackgroundColorop");
             if (cinfo == null || cinfo.Length < 1) cinfo = "#FF1EDCCB";
             BackgroundColor = cinfo;
 
-            string cinfo2 = IniFile.IniReadValue(createTime, "ForegroundColor");
+            string cinfo2 = IniFile.IniReadValue(CreateTime, "ForegroundColor");
             if (cinfo2 == null || cinfo2.Length < 1) cinfo2 = "#FF000000";
             ForegroundColor = cinfo2;
 
-            string fixedTop = IniFile.IniReadValue(createTime, "Topmost");
+            string fixedTop = IniFile.IniReadValue(CreateTime, "Topmost");
             if (fixedTop == null || fixedTop.Length < 1) fixedTop = "False";
             Topmost = Boolean.Parse(fixedTop);
         }
@@ -109,6 +119,14 @@ namespace trip.bean
             }
 
             sr.Close();
+        }
+
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
         }
     }
 }
