@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:trip"
         xmlns:bean="clr-namespace:trip.bean" x:Class="trip.ListWindow"
         mc:Ignorable="d"
-        Title="列表" Height="600" Width="350">
+        Title="列表" Height="600" Width="350" Closed="OnClosedWindow">
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="Control.Padding" Value="0,5,0,5"/>
@@ -24,10 +24,15 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Content="添加" Click="OnClickAdd" Width="Auto"/>
+        <ListView Grid.Row="1" x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="显示" />
+                    <MenuItem Header="显示" Click="MenuItem_Click_Show"/>
                     <MenuItem Header="隐藏" />
                     <MenuItem Header="删除" />
                 </ContextMenu>
@@ -35,7 +40,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid >
-                        <TextBlock Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
+                        <TextBlock TextTrimming="WordEllipsis" MaxHeight="200" Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

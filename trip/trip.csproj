@@ -93,6 +93,9 @@
     <Compile Include="test\TestListViewStyleWindow.xaml.cs">
       <DependentUpon>TestListViewStyleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="util\AdminUtil.cs" />
+    <Compile Include="util\RegUtil.cs" />
+    <Compile Include="util\ToolsCommon.cs" />
     <Page Include="ColorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,9 +176,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="util\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

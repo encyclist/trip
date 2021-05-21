@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using trip.bean;
+using trip.util;
 
 namespace trip
 {
@@ -20,21 +12,71 @@ namespace trip
     /// </summary>
     public partial class ListWindow : Window
     {
+        private List<MainWindow> mainWindows = new List<MainWindow>();
+
         public ListWindow()
         {
             InitializeComponent();
+            if (AdminUtil.IsRunAsAdmin())
+                RegUtil.SelfRunning();
+
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            for (int i = 0; i < 100; i++)
+
+            string appPath = Directory.GetCurrentDirectory();
+            FileInfo[] files = new DirectoryInfo(appPath).GetFiles();
+            foreach (FileInfo file in files)
             {
-                Trip trip = new Trip
+                string fileName = file.Name.ToLower();
+                if (fileName.StartsWith("content-") && fileName.EndsWith(".txt"))
                 {
-                    ForegroundColor = "#ffff00",
-                    BackgroundColor = "#ff0000",
-                    Content = "" + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i + i
-                };
-                listView.Items.Add(trip);
+                    string time = fileName.Substring(8, 13);
+                    Trip trip = new Trip(time);
+                    MainWindow mainWindow = new MainWindow(trip);
+                    mainWindows.Add(mainWindow);
+                    listView.Items.Add(trip);
+                }
             }
+        }
+
+        private void MenuItem_Click_Show(object sender, RoutedEventArgs e)
+        {
+            int index = listView.SelectedIndex;
+            Trip item = (Trip)listView.Items[index];
+
+            MainWindow mainWindow = null;
+            foreach (MainWindow mainWindow1 in mainWindows)
+            {
+                if (mainWindow1.IsSame(item))
+                {
+                    mainWindow = mainWindow1;
+                    mainWindow.Activate();
+                    break;
+                }
+            }
+            if (mainWindow == null)
+            {
+                mainWindow = new MainWindow(item);
+                mainWindows.Add(mainWindow);
+                mainWindow.Show();
+            }
+        }
+
+        // 列表页面关闭时关闭所有窗口
+        private void OnClosedWindow(object sender, EventArgs e)
+        {
+            foreach (MainWindow mainWindow1 in mainWindows)
+            {
+                mainWindow1.Close();
+            }
+        }
+
+        private void OnClickAdd(object sender, RoutedEventArgs e)
+        {
+            Trip trip = new Trip();
+            MainWindow mainWindow = new MainWindow(trip);
+            mainWindows.Add(mainWindow);
+            mainWindow.Show();
         }
     }
 }
