@@ -1,0 +1,44 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:trip"
+        xmlns:bean="clr-namespace:trip.bean" x:Class="trip.ListWindow"
+        mc:Ignorable="d"
+        Title="列表" Height="600" Width="350">
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Control.Padding" Value="0,5,0,5"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Padding="{TemplateBinding Control.Padding}" >
+                            <ContentPresenter 
+                                Content="{TemplateBinding ContentControl.Content}" 
+                                ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"  />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListView x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="显示" />
+                    <MenuItem Header="隐藏" />
+                    <MenuItem Header="删除" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <TextBlock Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
