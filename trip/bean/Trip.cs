@@ -6,7 +6,7 @@ using ToolsCommon;
 
 namespace trip.bean
 {
-    public class Trip: INotifyPropertyChanged
+    public class Trip : INotifyPropertyChanged
     {
         // 背景颜色
         public string BackgroundColor { get; private set; }
@@ -18,23 +18,14 @@ namespace trip.bean
         public double Top { get; private set; }
         // 是否置顶
         public bool Topmost { get; private set; }
-        // 宽
-        private double Width;
-        // 高
-        private double Height;
 
         // 文字内容
         public string Content { get; private set; }
 
-        // 配置文件路径
-        public string ConfigFilePath { get; private set; }
         // 内容文件路径
         public string ContentFilePath { get; private set; }
         // 历史记录文件路径
         public string HistoryFilePath { get; private set; }
-
-        // 配置文件操作工具
-        public IniFile IniFile { get; private set; }
 
         // 创建时间
         public string CreateTime { get; private set; }
@@ -58,11 +49,9 @@ namespace trip.bean
         {
             string appPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-            ConfigFilePath = appPath + @"\congig.ini";
             ContentFilePath = appPath + @"\content-" + CreateTime + ".txt"; ;
             HistoryFilePath = appPath + @"\history-" + CreateTime + ".txt"; ;
 
-            IniFile = new IniFile(ConfigFilePath);
             ReadConfig();
             ReadContent();
         }
@@ -75,33 +64,25 @@ namespace trip.bean
         }
 
         // 读取配置文件
-        private void ReadConfig() 
+        private void ReadConfig()
         {
-            string leftinfos = IniFile.IniReadValue(CreateTime, "Left");
+            string leftinfos = IniFile.GetInstance().IniReadValue(CreateTime, "Left");
             if (leftinfos == null || leftinfos.Length < 1) leftinfos = "100";
             Left = Double.Parse(leftinfos);
 
-            string topinfos = IniFile.IniReadValue(CreateTime, "Top");
+            string topinfos = IniFile.GetInstance().IniReadValue(CreateTime, "Top");
             if (topinfos == null || topinfos.Length < 1) topinfos = "100";
             Top = Double.Parse(topinfos);
 
-            string widthinfos = IniFile.IniReadValue(CreateTime, "Width");
-            if (widthinfos == null || widthinfos.Length < 1) widthinfos = "300";
-            Width = Double.Parse(widthinfos);
-
-            string heightinfos = IniFile.IniReadValue(CreateTime, "Height");
-            if (heightinfos == null || heightinfos.Length < 1) heightinfos = "300";
-            Width = Double.Parse(heightinfos);
-
-            string cinfo = IniFile.IniReadValue(CreateTime, "TBackgroundColorop");
+            string cinfo = IniFile.GetInstance().IniReadValue(CreateTime, "TBackgroundColorop");
             if (cinfo == null || cinfo.Length < 1) cinfo = "#FF1EDCCB";
             BackgroundColor = cinfo;
 
-            string cinfo2 = IniFile.IniReadValue(CreateTime, "ForegroundColor");
+            string cinfo2 = IniFile.GetInstance().IniReadValue(CreateTime, "ForegroundColor");
             if (cinfo2 == null || cinfo2.Length < 1) cinfo2 = "#FF000000";
             ForegroundColor = cinfo2;
 
-            string fixedTop = IniFile.IniReadValue(CreateTime, "Topmost");
+            string fixedTop = IniFile.GetInstance().IniReadValue(CreateTime, "Topmost");
             if (fixedTop == null || fixedTop.Length < 1) fixedTop = "False";
             Topmost = Boolean.Parse(fixedTop);
         }
@@ -113,7 +94,7 @@ namespace trip.bean
             StreamReader sr = new StreamReader(fs);
 
             Content = sr.ReadToEnd();
-            if (Content == null || Content.Length < 1) 
+            if (Content == null || Content.Length < 1)
             {
                 Content = "trip";
             }

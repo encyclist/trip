@@ -32,8 +32,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Click="OnClickAdd" Width="50" Margin="10,0,0,0" HorizontalAlignment="Left" Content="添加"/>
-        <Button Grid.Row="0" Grid.Column="1" Click="OnClickHideAll" Width="70" Margin="10,0,0,0" HorizontalAlignment="Left" Content="全部隐藏"/>
+        <Button Grid.Row="0" Grid.Column="0" Click="OnClickAdd" Width="50" Margin="10,5,0,0" HorizontalAlignment="Left" Content="添加"/>
+        <Button Grid.Row="0" Grid.Column="1" Click="OnClickHideAll" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" Content="全部隐藏"/>
         <ListView Grid.Row="1" Grid.ColumnSpan="2" x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -45,7 +45,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid >
-                        <TextBlock TextTrimming="WordEllipsis" MaxHeight="200" Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
+                        <Border BorderBrush="#999999" BorderThickness="1">
+                            <TextBlock TextTrimming="WordEllipsis" MaxHeight="200" Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
