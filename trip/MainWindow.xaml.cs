@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ToolsCommon;
 using trip.bean;
 
 namespace trip
@@ -100,13 +99,13 @@ namespace trip
         //写配置信息
         void Writeinfo()
         {
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "Left", "" + panl.Left);
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "Top", "" + panl.Top);
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "Width", "" + panl.Width);
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "Height", "" + panl.Height);
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "Topmost", "" + this.Topmost);
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "TBackgroundColorop", ((Brush)b_grid.Background).ToString());
-            IniFile.GetInstance().IniWriteValue(trip.CreateTime, "ForegroundColor", ((Brush)texxt.Foreground).ToString());
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Left", "" + panl.Left);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Top", "" + panl.Top);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Width", "" + panl.Width);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Height", "" + panl.Height);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "Topmost", "" + this.Topmost);
+            trip.IniFile.IniWriteValue(trip.CreateTime, "TBackgroundColorop", ((Brush)b_grid.Background).ToString());
+            trip.IniFile.IniWriteValue(trip.CreateTime, "ForegroundColor", ((Brush)texxt.Foreground).ToString());
         }
 
         // 固定顶层/取消固定

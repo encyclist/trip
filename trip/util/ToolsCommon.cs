@@ -3,7 +3,7 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
-using System.Diagnostics;
+
 
 namespace ToolsCommon
 {
@@ -12,19 +12,9 @@ namespace ToolsCommon
     /// </summary>
     public class IniFile
     {
-        private static readonly IniFile Instance = new IniFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\congig.ini");
-        public static IniFile GetInstance() 
-        {
-            return Instance;
-        }
+        public string path;
 
-
-
-
-
-        public string path { get; private set; }
-
-        private IniFile(string INIPath)
+        public IniFile(string INIPath)
         {
             path = INIPath;
         }
