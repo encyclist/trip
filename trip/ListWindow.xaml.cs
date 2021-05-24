@@ -146,7 +146,8 @@ namespace trip
                 Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath)//托盘中显示的图标
             };
             _notifyIcon.ShowBalloonTip(2000);//托盘气泡显示时间
-            _notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
+            //_notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
+            _notifyIcon.MouseClick += notifyIcon_MouseDoubleClick;
             //窗体状态改变时触发
             this.StateChanged += MainWindow_StateChanged;
         }
