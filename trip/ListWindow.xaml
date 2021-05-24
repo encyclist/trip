@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:trip"
         xmlns:bean="clr-namespace:trip.bean" x:Class="trip.ListWindow"
         mc:Ignorable="d"
-        Title="贴士列表" Height="600" Width="350" Closed="OnClosedWindow" Activated="OnActivited">
+        Title="贴士列表" Height="600" Width="350" Closed="OnClosedWindow" Activated="OnActivited" >
     <Window.Resources>
         <Style TargetType="ListViewItem">
             <Setter Property="Control.Padding" Value="0,5,0,5"/>
@@ -26,7 +26,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,7 +34,7 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Click="OnClickAdd" Width="50" Margin="10,5,0,0" HorizontalAlignment="Left" Content="添加"/>
         <Button Grid.Row="0" Grid.Column="1" Click="OnClickHideAll" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" Content="全部隐藏"/>
-        <ListView Grid.Row="1" Grid.ColumnSpan="2" x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
+        <ListView ScrollViewer.CanContentScroll="False" Grid.Row="1" Grid.ColumnSpan="2" x:Name="listView" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderBrush="{x:Null}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="显示" Click="MenuItem_Click_Show"/>

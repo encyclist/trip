@@ -138,11 +138,13 @@ namespace trip
             //隐藏主窗体
             this.Visibility = Visibility.Hidden;
             //设置托盘的各个属性
-            _notifyIcon = new NotifyIcon();
-            _notifyIcon.BalloonTipText = "贴士已最小化至托盘图标运行";//托盘气泡显示内容
-            _notifyIcon.Text = "贴士";
-            _notifyIcon.Visible = true;//托盘按钮是否可见
-            _notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);//托盘中显示的图标
+            _notifyIcon = new NotifyIcon
+            {
+                BalloonTipText = "贴士已最小化至托盘图标运行",//托盘气泡显示内容
+                Text = "贴士",
+                Visible = true,//托盘按钮是否可见
+                Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath)//托盘中显示的图标
+            };
             _notifyIcon.ShowBalloonTip(2000);//托盘气泡显示时间
             _notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
             //窗体状态改变时触发
@@ -155,7 +157,8 @@ namespace trip
         {
             if (this.WindowState == WindowState.Minimized)
             {
-                this.Visibility = Visibility.Hidden;
+                this.WindowState = WindowState.Normal; // 取消最小化的操作
+                this.Visibility = Visibility.Hidden; // 隐藏窗口
             }
         }
         #endregion
