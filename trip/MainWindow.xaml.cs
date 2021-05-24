@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -44,6 +45,27 @@ namespace trip
         void Zhizuo_hosttrip()
         {
             FileStream fs = new FileStream(trip.HistoryFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter m_streamWriter = new StreamWriter(fs);
+            m_streamWriter.Flush();
+            //  使用StreamWriter来往文件中写入内容
+            m_streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            //  把richTextBox1中的内容写入文件
+            m_streamWriter.Write(texxt.Text);
+            m_streamWriter.Write("\r\n--------------------------------------------------------------\r\n");
+            //关闭此文件
+            m_streamWriter.Flush();
+            m_streamWriter.Close();
+
+            SaveAllHistory();
+        }
+
+        // 所有窗口的历史记录都要保存
+        private void SaveAllHistory()
+        {
+            string appPath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            string historyFilePath = appPath + @"\history.txt"; ;
+
+            FileStream fs = new FileStream(historyFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter m_streamWriter = new StreamWriter(fs);
             m_streamWriter.Flush();
             //  使用StreamWriter来往文件中写入内容
