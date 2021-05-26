@@ -28,8 +28,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>trip</ProductName>
     <PublisherName>erning</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>2.1.4.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.2.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -92,6 +92,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="bean\Trip.cs" />
+    <Compile Include="dialog\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="test\TestListViewStyleWindow.xaml.cs">
       <DependentUpon>TestListViewStyleWindow.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
     <Compile Include="util\RegUtil.cs" />
     <Compile Include="util\ToolsCommon.cs" />
     <Page Include="ColorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dialog\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

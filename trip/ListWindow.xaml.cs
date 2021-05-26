@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Forms;
 using ToolsCommon;
 using trip.bean;
+using trip.dialog;
 using trip.util;
 
 namespace trip
@@ -100,6 +101,20 @@ namespace trip
             File.Delete(item.ContentFilePath);
             File.Delete(item.HistoryFilePath);
             IniFile.GetInstance().ClearSection(item.CreateTime);
+        }
+
+        private void MenuItem_Click_SetTitle(object sender, RoutedEventArgs e)
+        {
+            Trip item = (Trip)listView.SelectedItem;
+
+            InputDialog dialog = new InputDialog(item.Title);
+            var r = dialog.ShowDialog();
+            //得到弹窗返回结果，如果是true
+            if (r.HasValue && r.Value == true)
+            {
+                IniFile.GetInstance().IniWriteValue(item.CreateTime, "Title", dialog.textBox.Text);
+                item.ReLoad();
+            }
         }
 
         // 列表页面关闭时关闭所有窗口
@@ -200,13 +215,19 @@ namespace trip
             for(int i= 0;i< listView.Items.Count;i++)
             {
                 Trip trip = (Trip)listView.Items[i];
-                string text = trip.Content.Trim().Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
-                if (text.Length > 20)
+                string text = trip.Title;
+                if (text == null || text.Length < 1) 
                 {
-                    text = text.Substring(0, 20);
+                    text = trip.Content.Trim().Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
+                    if (text.Length > 20)
+                    {
+                        text = text.Substring(0, 20);
+                    }
                 }
-                MenuItem menuItem = new MenuItem(text);
-                menuItem.Tag = trip;
+                MenuItem menuItem = new MenuItem(text)
+                {
+                    Tag = trip
+                };
                 menuItem.Click += new EventHandler(OnClickContextMentItem);
                 menuItems.Add(menuItem);
             }

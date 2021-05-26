@@ -21,6 +21,8 @@ namespace trip.bean
 
         // 文字内容
         public string Content { get; private set; }
+        // 标题内容
+        public string Title { get; set; }
 
         // 内容文件路径
         public string ContentFilePath { get; private set; }
@@ -66,6 +68,8 @@ namespace trip.bean
         // 读取配置文件
         private void ReadConfig()
         {
+            Title = IniFile.GetInstance().IniReadValue(CreateTime, "Title");
+
             string leftinfos = IniFile.GetInstance().IniReadValue(CreateTime, "Left");
             if (leftinfos == null || leftinfos.Length < 1) leftinfos = "100";
             Left = Double.Parse(leftinfos);
@@ -104,10 +108,7 @@ namespace trip.bean
 
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
+            PropertyChanged?.Invoke(this, e);
         }
     }
 }

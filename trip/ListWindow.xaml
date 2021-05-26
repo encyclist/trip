@@ -40,15 +40,26 @@
                     <MenuItem Header="显示" Click="MenuItem_Click_Show"/>
                     <MenuItem Header="隐藏" Click="MenuItem_Click_Hide"/>
                     <MenuItem Header="删除" Click="MenuItem_Click_Delete"/>
+                    <MenuItem Header="设置标题" Click="MenuItem_Click_SetTitle"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid >
-                        <Border BorderBrush="#999999" BorderThickness="1">
-                            <TextBlock TextTrimming="WordEllipsis" MaxHeight="200" Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Background="{Binding BackgroundColor}" Foreground="{Binding ForegroundColor}"/>
-                        </Border>
-                    </Grid>
+                    <Border BorderBrush="#999999" BorderThickness="1">
+                        <Grid Background="{Binding BackgroundColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderBrush="#333333" BorderThickness="0,0,0,0.5" >
+                                <TextBlock Grid.Row="0" Text="{Binding Title}" Padding="5" ToolTip="标题"/>
+                            </Border>
+                            <TextBlock Grid.Row="1" TextTrimming="WordEllipsis" MaxHeight="200" Padding="5" Text="{Binding Content}" TextWrapping="Wrap" Foreground="{Binding ForegroundColor}"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
