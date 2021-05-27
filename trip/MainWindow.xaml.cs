@@ -39,6 +39,9 @@ namespace trip
             Zhizuo_hosttrip();
             m_streamWriter.Flush();
             m_streamWriter.Close();
+
+            trip.ReLoad();
+            ListWindow.Instance.RefreshContextMenu();
         }
 
         //写历史文件

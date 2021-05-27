@@ -15,12 +15,15 @@ namespace trip
     /// </summary>
     public partial class ListWindow : Window
     {
+        public static ListWindow Instance { get; private set; }
+
         private List<MainWindow> mainWindows = new List<MainWindow>();
         private NotifyIcon _notifyIcon = null;
 
         public ListWindow()
         {
             InitializeComponent();
+            Instance = this;
 
             if (AdminUtil.IsRunAsAdmin())
                 RegUtil.SelfRunning();
@@ -114,7 +117,14 @@ namespace trip
             {
                 IniFile.GetInstance().IniWriteValue(item.CreateTime, "Title", dialog.textBox.Text);
                 item.ReLoad();
+                RefreshContextMenu();
             }
+        }
+
+        private void MenuItem_Click_History(object sender, RoutedEventArgs e)
+        {
+            Trip item = (Trip)listView.SelectedItem;
+            System.Diagnostics.Process.Start(item.HistoryFilePath);
         }
 
         // 列表页面关闭时关闭所有窗口
@@ -209,16 +219,19 @@ namespace trip
         #endregion
 
         // 刷新右键菜单项
-        private void RefreshContextMenu()
+        public void RefreshContextMenu()
         {
             List<MenuItem> menuItems = new List<MenuItem>();
-            for(int i= 0;i< listView.Items.Count;i++)
+            MenuItem add = new MenuItem("新增");
+            add.Click += new EventHandler(OnClickContextMentItemAdd);
+            menuItems.Add(add);
+            for (int i= 0;i< listView.Items.Count;i++)
             {
                 Trip trip = (Trip)listView.Items[i];
                 string text = trip.Title;
                 if (text == null || text.Length < 1) 
                 {
-                    text = trip.Content.Trim().Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
+                    text = trip.Content.Trim().Replace("\r\n", "").Replace("\n", "").Replace("\r", "");
                     if (text.Length > 20)
                     {
                         text = text.Substring(0, 20);
@@ -234,6 +247,10 @@ namespace trip
             _notifyIcon.ContextMenu = new ContextMenu(menuItems.ToArray());
         }
 
+        private void OnClickContextMentItemAdd(object sender, EventArgs e)
+        {
+            OnClickAdd(null,null);
+        }
         // 点击了右键菜单中的某一项
         private void OnClickContextMentItem(object sender, EventArgs e)
         {
